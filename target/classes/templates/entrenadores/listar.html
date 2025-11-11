@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Entrenadores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">⚽ Futbol App</a>
+            <div class="navbar-nav">
+                <a class="nav-link" th:href="@{/clubes}">Clubes</a>
+                <a class="nav-link" th:href="@{/jugadores}">Jugadores</a>
+                <a class="nav-link active" th:href="@{/entrenadores}">Entrenadores</a>
+                <a class="nav-link" th:href="@{/competiciones}">Competiciones</a>
+                <a class="nav-link" th:href="@{/asociaciones}">Asociaciones</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>👨‍💼 Lista de Entrenadores</h1>
+                <p class="text-muted" th:text="${'Total: ' + entrenadores.size() + ' entrenadores'}"></p>
+            </div>
+            <div>
+                <a th:href="@{/}" class="btn btn-secondary">🏠 Inicio</a>
+                <a th:href="@{/entrenadores/nuevo}" class="btn btn-success">➕ Nuevo Entrenador</a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>Nacionalidad</th>
+                        <th>Club</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entrenador : ${entrenadores}">
+                        <td th:text="${entrenador.id}"></td>
+                        <td th:text="${entrenador.nombre}"></td>
+                        <td th:text="${entrenador.apellido}"></td>
+                        <td th:text="${entrenador.edad}"></td>
+                        <td>
+                            <span th:text="${entrenador.nacionalidad}" class="badge bg-info text-dark"></span>
+                        </td>
+                        <td>
+                            <span th:if="${entrenador.club}" th:text="${entrenador.club.nombre}" class="badge bg-success"></span>
+                            <span th:unless="${entrenador.club}" class="badge bg-warning text-dark">Sin club</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <a th:href="@{/entrenadores/ver/{id}(id=${entrenador.id})}" class="btn btn-info">👁️</a>
+                                <a th:href="@{/entrenadores/editar/{id}(id=${entrenador.id})}" class="btn btn-warning">✏️</a>
+                                <a th:href="@{/entrenadores/eliminar/{id}(id=${entrenador.id})}" class="btn btn-danger"
+                                   onclick="return confirm('¿Eliminar entrenador ' + '[[${entrenador.nombre}]]' + ' ' + '[[${entrenador.apellido}]]' + '?')">
+                                   🗑️
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div th:if="${entrenadores.empty}" class="alert alert-info text-center">
+            <h4>No hay entrenadores registrados</h4>
+            <a th:href="@{/entrenadores/nuevo}" class="btn btn-success">➕ Crear Primer Entrenador</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
