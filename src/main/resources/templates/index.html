@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Fútbol</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .jumbotron {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="jumbotron text-center">
+            <h1 class="display-4">⚽ Sistema de Gestión de Fútbol</h1>
+            <p class="lead">Gestiona clubes, jugadores, entrenadores, competiciones y asociaciones</p>
+            <hr class="my-4" style="background-color: white;">
+            <p>Sistema completo CRUD desarrollado con Spring Boot y Thymeleaf</p>
+        </div>
+        
+        <div class="row">
+            <!-- Clubes -->
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">🏆 Clubes</h5>
+                        <p class="card-text">Gestiona los clubes de fútbol, sus datos básicos y relaciones</p>
+                        <div class="btn-group-vertical w-100">
+                            <a th:href="@{/clubes}" class="btn btn-primary mb-2">Ver Clubes</a>
+                            <a th:href="@{/clubes/nuevo}" class="btn btn-outline-primary">Nuevo Club</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Jugadores -->
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">⚽ Jugadores</h5>
+                        <p class="card-text">Administra la plantilla de jugadores y sus características</p>
+                        <div class="btn-group-vertical w-100">
+                            <a th:href="@{/jugadores}" class="btn btn-success mb-2">Ver Jugadores</a>
+                            <a th:href="@{/jugadores/nuevo}" class="btn btn-outline-success">Nuevo Jugador</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Entrenadores -->
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">👨‍💼 Entrenadores</h5>
+                        <p class="card-text">Gestiona el cuerpo técnico de los equipos</p>
+                        <div class="btn-group-vertical w-100">
+                            <a th:href="@{/entrenadores}" class="btn btn-warning mb-2">Ver Entrenadores</a>
+                            <a th:href="@{/entrenadores/nuevo}" class="btn btn-outline-warning">Nuevo Entrenador</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Competiciones -->
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">🏅 Competiciones</h5>
+                        <p class="card-text">Administra torneos y competiciones</p>
+                        <div class="btn-group-vertical w-100">
+                            <a th:href="@{/competiciones}" class="btn btn-info mb-2">Ver Competiciones</a>
+                            <a th:href="@{/competiciones/nuevo}" class="btn btn-outline-info">Nueva Competición</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Asociaciones -->
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">🌍 Asociaciones</h5>
+                        <p class="card-text">Gestiona federaciones y asociaciones deportivas</p>
+                        <div class="btn-group-vertical w-100">
+                            <a th:href="@{/asociaciones}" class="btn btn-dark mb-2">Ver Asociaciones</a>
+                            <a th:href="@{/asociaciones/nuevo}" class="btn btn-outline-dark">Nueva Asociación</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Base de Datos -->
+           
+        </div>
+        
+        <footer class="text-center mt-5 mb-3">
+            <hr>
+            <p class="text-muted">Sistema de Gestión de Fútbol &copy; 2024 - Desarrollado con Spring Boot</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showInfo() {
+            alert("URL Base de Datos: http://localhost:8080/h2-console\nJDBC URL: jdbc:h2:mem:testdb\nUsuario: sa\nPassword: (vacío)");
+        }
+    </script>
+</body>
+</html>

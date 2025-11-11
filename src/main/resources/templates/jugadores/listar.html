@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Jugadores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/}">⚽ Futbol App</a>
+            <div class="navbar-nav">
+                <a class="nav-link" th:href="@{/clubes}">Clubes</a>
+                <a class="nav-link active" th:href="@{/jugadores}">Jugadores</a>
+                <a class="nav-link" th:href="@{/entrenadores}">Entrenadores</a>
+                <a class="nav-link" th:href="@{/competiciones}">Competiciones</a>
+                <a class="nav-link" th:href="@{/asociaciones}">Asociaciones</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>⚽ Lista de Jugadores</h1>
+                <p class="text-muted" th:text="${'Total: ' + jugadores.size() + ' jugadores'}"></p>
+            </div>
+            <div>
+                <a th:href="@{/}" class="btn btn-secondary">🏠 Inicio</a>
+                <a th:href="@{/jugadores/nuevo}" class="btn btn-success">➕ Nuevo Jugador</a>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Número</th>
+                        <th>Posición</th>
+                        <th>Club</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="jugador : ${jugadores}">
+                        <td th:text="${jugador.id}"></td>
+                        <td th:text="${jugador.nombre}"></td>
+                        <td th:text="${jugador.apellido}"></td>
+                        <td>
+                            <span th:if="${jugador.numero > 0}" th:text="${jugador.numero}" class="badge bg-dark"></span>
+                            <span th:unless="${jugador.numero > 0}" class="badge bg-secondary">Sin número</span>
+                        </td>
+                        <td>
+                            <span th:if="${jugador.posicion}" th:text="${jugador.posicion}" class="badge bg-primary"></span>
+                            <span th:unless="${jugador.posicion}" class="badge bg-secondary">Sin posición</span>
+                        </td>
+                        <td>
+                            <span th:if="${jugador.club}" th:text="${jugador.club.nombre}" class="badge bg-success"></span>
+                            <span th:unless="${jugador.club}" class="badge bg-warning text-dark">Sin club</span>
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm">
+                                <a th:href="@{/jugadores/ver/{id}(id=${jugador.id})}" class="btn btn-info">👁️</a>
+                                <a th:href="@{/jugadores/editar/{id}(id=${jugador.id})}" class="btn btn-warning">✏️</a>
+                                <a th:href="@{/jugadores/eliminar/{id}(id=${jugador.id})}" class="btn btn-danger"
+                                   onclick="return confirm('¿Eliminar jugador ' + '[[${jugador.nombre}]]' + ' ' + '[[${jugador.apellido}]]' + '?')">
+                                   🗑️
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div th:if="${jugadores.empty}" class="alert alert-info text-center">
+            <h4>No hay jugadores registrados</h4>
+            <a th:href="@{/jugadores/nuevo}" class="btn btn-success">➕ Crear Primer Jugador</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

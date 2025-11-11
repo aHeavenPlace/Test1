@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${competicion.id != null} ? 'Editar Competición' : 'Nueva Competición'"></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 th:text="${competicion.id != null} ? '✏️ Editar Competición' : '➕ Nueva Competición'"></h1>
+            <a th:href="@{/competiciones}" class="btn btn-secondary">Volver</a>
+        </div>
+
+        <form th:action="${competicion.id != null} ? @{/competiciones/guardar} : @{/competiciones/guardar}" 
+              th:object="${competicion}" method="post">
+            
+            <input type="hidden" th:field="*{id}">
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre de la Competición</label>
+                        <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="montoPremio" class="form-label">Monto del Premio</label>
+                        <input type="number" class="form-control" id="montoPremio" th:field="*{montoPremio}">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                        <input type="date" class="form-control" id="fechaInicio" th:field="*{fechaInicio}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="fechaFin" class="form-label">Fecha de Fin</label>
+                        <input type="date" class="form-control" id="fechaFin" th:field="*{fechaFin}">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <a th:href="@{/competiciones}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
